@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/header.css'
 import {Nav} from 'react-bootstrap'
 // import NavDropdown from 'react-bootstrap/NavDropdown';
-import {Link, Switch, Route} from "react-router-dom"
+import {Link} from "react-router-dom"
 
 export default function Header (){
     return(
