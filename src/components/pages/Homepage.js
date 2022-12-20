@@ -19,13 +19,14 @@ export default function Homepage() {
                         </Nav.Item>
                     </Nav>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body id="login">
                     <InputGroup className="mb-3">
                         {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
                         <Form.Control
                             placeholder="Username"
                             aria-label="Username"
                             aria-describedby="basic-addon1"
+                            id="userName"
                         />
                     </InputGroup>
                     <InputGroup className="mb-3">
@@ -42,6 +43,7 @@ export default function Homepage() {
                             aria-label="Password"
                             aria-describedby="basic-addon1"
                             type="password"
+                            id="password"
                         />
                     </InputGroup>
                     <Button className="submitBtn" variant="outline-secondary" type="submit" style={{marginLeft:"78%"}}>ENTER</Button>

@@ -16,7 +16,7 @@ export default function Header (){
           <Nav.Link as={Link} to="/">Prompts</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/">Journal</Nav.Link>
+          <Nav.Link as={Link} to="/journals">Journal</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link as={Link} to="/">Theme</Nav.Link>
