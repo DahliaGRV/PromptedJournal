@@ -1,0 +1,19 @@
+.modal-body {
+    background-color: #FFB6C1;
+    margin: 0
+
+ }
+ /* .modal-backdrop {
+    background-image: url('/pastelClouds.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #FFB6C1;
+ } */
+ .modal-header {
+    background-image: url('/pastelClouds.jpg') !important;
+ }
+ .modal-footer {
+    background-image: url('/pastelClouds.jpg') !important;
+    background-color: #FFB6C1;
+    margin: 0
+ }

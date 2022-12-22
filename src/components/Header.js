@@ -7,8 +7,7 @@ import {Link} from "react-router-dom"
 export default function Header (){
     return(
         <div>
-        <Nav style={{backgroundColor:"#ff99aa",padding:"1.2rem"}}
-      >
+        <Nav style={{backgroundColor:"#ff99aa",padding:"1.2rem"}}>
         <Nav.Item >
           <Nav.Link as={Link} to="/">Home</Nav.Link>
         </Nav.Item>
@@ -20,6 +19,9 @@ export default function Header (){
         </Nav.Item>
         <Nav.Item>
           <Nav.Link as={Link} to="/">Theme</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link as={Link} to="/login">Login/Sign Up</Nav.Link>
         </Nav.Item>
       </Nav>
       <div>

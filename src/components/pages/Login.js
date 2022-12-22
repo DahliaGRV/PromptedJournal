@@ -1,47 +1,52 @@
-import React, {useEffect,useState} from 'react';
-import '../../styles/homepage.css'
-import { Card, Form, InputGroup, Nav, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react';
+// import '../../styles/homepage.css'
+import { Card, Form, InputGroup, Button, ButtonGroup, Modal } from 'react-bootstrap'
+import '../../styles/login.css'
+// import API from '../../utils/API'
 
 export default function Login(props) {
-    useEffect(()=>{
+    useEffect(() => {
         const savedToken = localStorage.getItem("token");
-        if(savedToken){
-          window.location= "/homepage"
+        if (savedToken) {
+            window.location = "/homepage"
         }
-      },[])
+    }, [])
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [loginData, setLoginData] = useState({
-        user_name:"",
-        password:""
+        email: "",
+        password: ""
     })
 
     const [signupData, setSignupData] = useState({
-        user_name:"",
-        password:""
+        email:"",
+        password: ""
     })
 
-    const loginSubmit = e=>{
+    const loginSubmit = e => {
         e.preventDefault();
-        props.login(loginData)
+        props.userLogin(loginData)
         setLoginData({
-            user_name:"",
-            password:""
+            email: "",
+            password: ""
         })
         const loginToken = localStorage.getItem("token");
-        if(loginToken){
-          window.location= "/homepage"
+        if (loginToken) {
+            window.location = "/homepage"
         }
     }
 
-    const signupSubmit = e=>{
+    const signupSubmit = e => {
         e.preventDefault();
         props.signup(signupData)
         setSignupData({
-            user_name:"",
-            password:""
+            email: "",
+            password: ""
         })
         const singupToken = localStorage.getItem("token");
-        if(singupToken){
-          window.location= "/homepage"
+        if (singupToken) {
+            window.location = "/homepage"
         }
     }
 
@@ -49,84 +54,72 @@ export default function Login(props) {
     return (
         <>
             <Card
-            style={{width:'25rem',height:'min-content', margin:"30vh auto auto auto", padding:"0%"}}>
+                style={{ width: '25rem', height: 'min-content', margin: "30vh auto auto auto", padding: "0%" }}>
                 <Card.Img src='/mountainNMoon.png' ></Card.Img>
-                <Card.ImgOverlay style={{padding:"0%"}}>
-                <Card.Header style={{backgroundColor:"transparent"}}>
-                    <Nav variant="tabs" defaultActiveKey="#signUp">
-                        <Nav.Item>
-                            <Nav.Link href="#signUp">Sign Up</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link href="#login">Login</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
-                <Card.Body id="login" action='#' method='post'>
+                <Card.ImgOverlay style={{ padding: "0%" }}>
+                    <Card.Header style={{ backgroundColor: "transparent", padding: "4%" }}>
+                        Login
+                    </Card.Header>
+                    <Card.Body id="login" style={{ paddingTop: "10%" }}>
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                placeholder="Email"
+                                aria-label="Email"
+                                aria-describedby="basic-addon1"
+                                id="email"
+                                required
+                                value={loginData.email}
+                                onChange={(e)=>setLoginData({...loginData,email:e.target.value})}
+                            />
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                placeholder="Password"
+                                aria-label="Password"
+                                aria-describedby="basic-addon1"
+                                type="password"
+                                id="password"
+                                value={loginData.password}
+                                onChange={(e)=>setLoginData({...loginData,password:e.target.value})} 
+                            />
+                        </InputGroup>
+                        <div style ={{position:"bottom",display: "flex",justifyContent:"space-between"}}>
+                        <Button className="signupBtn" variant="outline-secondary" onClick ={handleShow} style={{}}>SIGN UP</Button>
+                        <Button className="submitBtn" variant="outline-secondary" type="submit" onClick = {loginSubmit} style={{ }}>ENTER</Button>
+                        </div>
+                    </Card.Body>
+                </Card.ImgOverlay>
+                <Card.Footer style={{ backgroundColor: "#E0B0FF" }}></Card.Footer>
+            </Card>
+            <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">Sign Up</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                placeholder="Email"
+                                aria-label="Email"
+                                aria-describedby="basic-addon1"
+                                type="email"
+                                onChange = {(e)=>setSignupData({...signupData,email:e.target.value})}
+                            />
+                        </InputGroup>
                     <InputGroup className="mb-3">
-                        {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
-                        <Form.Control
-                            placeholder="Username"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            id="userName"
-                            value={loginData.user_name}
-                            onChange={(e)=>setLoginData({...loginData,user_name:e.target.value})}
-                        />
-                         <Form.Control
-                            placeholder="Email"
-                            aria-label="Email"
-                            aria-describedby="basic-addon1"
-                            type="email"
-                            value={loginData.email}
-                            onChange={(e)=>setLoginData({...loginData,email:e.target.value})}
-                        />
                         <Form.Control
                             placeholder="Password"
                             aria-label="Password"
                             aria-describedby="basic-addon1"
                             type="password"
                             id="password"
-                            value={loginData.password}
-                            onChange={(e)=>setLoginData({...loginData,password:e.target.value})}
+                            onChange = {(e)=>setSignupData({...signupData,password:e.target.value})}
                         />
                     </InputGroup>
-                    <Button className="submitBtn" variant="outline-secondary" type="submit" style={{marginLeft:"78%"}}>ENTER</Button>
-                </Card.Body>
-                <Card.Body id="signup" action='#' method='post'>
-                    <InputGroup className="mb-3">
-                        {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
-                        <Form.Control
-                            placeholder="Username"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            id="signupUserName"
-                            value={signupData.user_name}
-                            onChange={(e)=>setSignupData({...signupData,user_name:e.target.value})}
-                        />
-                         <Form.Control
-                            placeholder="Email"
-                            aria-label="Email"
-                            aria-describedby="basic-addon1"
-                            type="signupEmail"
-                            value={signupData.email}
-                            onChange={(e)=>setSignupData({...signupData,email:e.target.value})}
-                        />
-                        <Form.Control
-                            placeholder="Password"
-                            aria-label="Password"
-                            aria-describedby="basic-addon1"
-                            type="password"
-                            id="signupPassword"
-                            value={signupData.password}
-                            onChange={(e)=>setSignupData({...signupData,password:e.target.value})}
-                        />
-                    </InputGroup>
-                    <Button className="submitBtn" variant="outline-secondary" type="submit" onClick={signupSubmit} style={{marginLeft:"78%"}}>ENTER</Button>
-                </Card.Body>
-                </Card.ImgOverlay>
-                <Card.Footer style={{backgroundColor:"#E0B0FF"}}></Card.Footer>
-            </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className="submitBtn" variant="secondary" type="submit" onClick ={signupSubmit} style={{ marginLeft: "78%" }}>ENTER</Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 
